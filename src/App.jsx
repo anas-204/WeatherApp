@@ -25,7 +25,7 @@ export default function App() {
 
         {/* ARIA Live Regions for loading/error states */}
         <div aria-live="polite" role="status" className="sr-only">
-          {isLoading ? "Fetching weather data..." : ""}
+          {isLoading ? "Fetching weather data..." : data ? `Showing weather for ${data.location.name} in ${units}` : ""}
         </div>
         <div aria-live="assertive" role="alert" className="sr-only">
           {isError ? `Error: ${error.message}` : ""}

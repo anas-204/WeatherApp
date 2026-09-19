@@ -20,7 +20,10 @@ export const HourlyForecast = ({ hourlyData, dailyData }) => {
         {/* Day Selector */}
         <div className="flex gap-2 overflow-x-auto pb-2 sm:pb-0 max-w-full scrollbar-hide" role="group" aria-label="Select forecast day">
           {dailyData.time.map((time, idx) => {
-            const date = new Date(time) // Safe for daily dates as they are typically midnight YYYY-MM-DD
+            // Split the date string (YYYY-MM-DD) and create a local date to avoid UTC shifts
+            const [year, month, day] = time.split('-')
+            const date = new Date(year, month - 1, day)
+            
             const dayName = idx === 0 ? 'Today' : date.toLocaleDateString('en-US', { weekday: 'short' })
             const isSelected = selectedDayIndex === idx
             
